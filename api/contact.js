@@ -10,10 +10,9 @@ export default async function handler(req, res) {
     const { name, email, phone, services, message } = req.body;
 
     try {
-        // Send the email
         await resend.emails.send({
-        from: 'Website Contact <https://sushi-guy.vercel.app/>', // 👈 change to your domain (or use on@resend.dev for testing)
-        to: 'jdalisaymo.10@gmail.com', // 👈 your actual inbox email address
+        from: 'Website Contact <on@resend.dev>',
+        to: 'jdalisaymo.10@gmail.com',
         subject: 'New Contact Form Submission',
         html: `
             <h2>New Message Received</h2>

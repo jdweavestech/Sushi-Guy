@@ -561,27 +561,29 @@
                 const data = Object.fromEntries(formData.entries());
 
                 try {
-                const res = await fetch('/api/contact.js', {
+                const response = await fetch('/api/contact', {
                     method: 'POST',
                     headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(data),
                 });
 
-                const result = await res.json();
-                if (result.success) {
+                const result = await response.json();
+
+                if (response.ok && result.success) {
                     alert('Thanks! Your message has been sent.');
                     this.reset();
                 } else {
-                    alert('Something went wrong. Please try again.');
+                    alert('Oops! Something went wrong.');
                 }
-                } catch (err) {
-                console.error(err);
-                alert('Error sending form.');
+                } catch (error) {
+                console.error('Submission error:', error);
+                alert('Error submitting the form. Please try again later.');
                 }
             });
         </script>
+
 
         <script src="/script.js"></script>
 
