@@ -1162,3 +1162,33 @@
         color: var(--primary-col);
     }
 /* FOOTER SECTION */
+
+
+/* THANK YOU PAGE */
+    .sg__ty-page .sg__ty-page-content
+    {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .sg__ty-page .sg__ty-page-content h1 
+    {
+        font-size: 40px;
+        line-height: 50px;
+        font-weight: bold;
+        font-family: var(--primary-font);
+        color: var(--text-col);
+        margin: 0;
+    }
+    .sg__ty-page .sg__ty-page-content p 
+    {
+        font-size: 16px;
+        line-height: 26px;
+        font-family: var(--secondary-font);
+        color: var(--text-col);
+        margin: 0;
+    }
+/* THANK YOU PAGE */
