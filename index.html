@@ -456,9 +456,7 @@
                                 <p class="sg__caption">GET IN TOUCH</p>
                                 <h2 class="sg__heading">Send Us a Message</h2>
                                 <div class="sg__connect-content-right-form-wrap">
-                                    <form action="https://formsubmit.co/jdalisaymo.10@gmail.com" method="POST">
-                                        <input type="hidden" name="_next" value="https://sushi-guy.vercel.app/thank-you.html">
-                                        <input type="hidden" name="_captcha" value="false">
+                                    <form id="contactForm">>
                                         <div class="sg__connect-form-row">
                                             <div class="sg__connect-form-column">
                                                 <label for="name">Name</label>
@@ -554,6 +552,36 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.22.1/js/uikit.min.js" integrity="sha512-qkqzK74IU8H20BO6C40yNpXY7Pfi7KbCs1cArEF/GF6/JLkTmCFuOzrSc9ftzMhVb3AKdSH6gq2TABfc4f8vog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js" integrity="sha512-Ysw1DcK1P+uYLqprEAzNQJP+J4hTx4t/3X2nbVwszao8wD+9afLjBQYjz7Uk4ADP+Er++mJoScI42ueGtQOzEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script>
+            document.getElementById('contactForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData.entries());
+
+                try {
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await res.json();
+                if (result.success) {
+                    alert('Thanks! Your message has been sent.');
+                    this.reset();
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+                } catch (err) {
+                console.error(err);
+                alert('Error sending form.');
+                }
+            });
+        </script>
 
         <script src="/script.js"></script>
 
