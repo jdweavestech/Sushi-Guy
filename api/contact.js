@@ -7,10 +7,22 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Only POST requests allowed' });
     }
 
-    const { name, email, phone, services, message } = req.body;
+    let body = req.body;
+
+    if (typeof body === 'string') {
+        try {
+        body = JSON.parse(body);
+        } catch (err) {
+        return res.status(400).json({ error: 'Invalid JSON' });
+        }
+    }
+
+    const { name, email, phone, services, message } = body;
+
+    console.log("Received contact form:", body);
 
     try {
-        await resend.emails.send({
+        const data = await resend.emails.send({
         from: 'Website Contact <on@resend.dev>',
         to: 'jdalisaymo.10@gmail.com',
         subject: 'New Contact Form Submission',
@@ -25,9 +37,9 @@ export default async function handler(req, res) {
         `,
         });
 
-        res.status(200).json({ success: true, message: 'Email sent successfully.' });
+        res.status(200).json({ success: true, message: 'Email sent successfully.', data });
     } catch (error) {
         console.error('Email sending failed:', error);
-        res.status(500).json({ success: false, error: 'Failed to send email' });
+        res.status(500).json({ success: false, error: error.message || 'Failed to send email' });
     }
 }

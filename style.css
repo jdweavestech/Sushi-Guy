@@ -115,6 +115,7 @@
         text-decoration: none;
         border: unset;
         outline: unset;
+        cursor: pointer;
     }
     .sg__button:hover 
     {
